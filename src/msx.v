@@ -25,8 +25,12 @@ module msx
   output wire          vSync,
 `endif
   // Keyboard
+`ifdef DIGILENT_PS2_PMOD
+  inout  [27:0] gp,gn,
+`else
   inout         ps2Clk,
   inout         ps2Data,
+`endif
   // Audio
   //output [3:0]  audio_l,
   //output [3:0]  audio_r,
@@ -207,8 +211,13 @@ module msx
     // Get PS/2 keyboard events
   ps2 ps2_kbd (
      .clk(cpuClock),
+`ifdef DIGILENT_PS2_PMOD
+     .ps2_clk(gn[1]),
+     .ps2_data(gn[3]),
+`else
      .ps2_clk(ps2Clk),
      .ps2_data(ps2Data),
+`endif
      .ps2_key(ps2_key)
   );
 

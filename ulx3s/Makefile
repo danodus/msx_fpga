@@ -24,7 +24,7 @@ DEVICE ?= 85k
 
 BUILDDIR = bin
 
-DEFINES = -DULX3S
+DEFINES = -DULX3S -DDIGILENT_PS2_PMOD
 
 compile: $(BUILDDIR)/toplevel.bit
 
